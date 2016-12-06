@@ -131,6 +131,42 @@ for i in range(0, t):
 
 
 
+
+
+
+
+
+
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+n = raw_input()
+test = n.split(
+test2 = []
+for i in test:
+    test2.append(float(i))
+
+
+def mean(numbers):
+    return float(sum(numbers)) / max(len(numbers), 1)
+
+sample_mean = mean(test2)
+
+from math import sqrt
+
+def stddev(lst):
+    mn = mean(lst)
+    variance = sum([(e-mn)**2 for e in lst]) / len(lst)
+    return sqrt(variance)
+
+sample_std_dev = stddev(test2)
+
+normalized_pts = []
+for i in test2:
+    normalized_pts.append((i/sample_mean)/sample_std_dev)
+print normalized_pts
+
+
+
 # loops:
 
 for i in range(1,11):
@@ -138,5 +174,103 @@ for i in range(1,11):
     print '2 X %d = %d' % (i, answer)
 
 
+# day 6 review (strings, loops):
+
+'''Given a string, S, of length N that is indexed from 0 to N-1,
+print its even-indexed and odd-indexed characters as 2 space-separated
+strings on a single line (see the Sample below for more detail).'''
 
 
+
+t = int(raw_input())
+
+for i in range(0, t):
+    string = raw_input()
+    oddStringValues = ''
+    evenStringValues = ''
+    for j in range(len(string)):
+        if j%2 == 0:
+            evenStringValues += string[j]
+        elif j%2 ==1:
+            oddStringValues += string[j]
+    print evenStringValues, oddStringValues
+
+
+# day 7 (arrays):
+
+#!/bin/python
+
+import sys
+
+n = int(raw_input().strip())
+arr = map(int,raw_input().strip().split(' '))
+
+# test array:
+
+arr = [1,2,3,4]
+
+#print n
+#print arr
+#print isinstance(arr[0], int)
+
+arr.reverse()
+
+#print arr
+
+for item in arr:
+    print item,
+
+# one liner solution:
+
+print(" ".join(map(str, arr[::-1])))
+
+# or:
+
+print(''.join(map(str, reversed(arr))))
+
+# or:
+
+from __future__ import print_function
+
+print(*reversed(arr)) # the '*' is from 3;
+
+# or:
+
+print(*arr[::-1])
+
+
+print(*['a','b','c'])
+
+
+# day 8 (dictionaries and maps):
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+n = int(raw_input().strip())
+
+# print 'n:', n
+
+# arr = raw_input().strip().split(' ')
+
+# print arr[1]
+
+import fileinput
+
+count = 0
+phoneBook = {}
+
+for line in fileinput.input():
+    count += 1
+    if count <= n:  # add first n number of phone book entries:
+        # print line.strip().split(' ')[0]
+        phoneBook[line.strip().split(' ')[0]] = line.strip().split(' ')[1]
+    if count > n:
+        # print line.strip()
+        if line.strip() in phoneBook:
+            output = line.strip(), '=', phoneBook[line.strip()]
+            print
+            ''.join(output)
+        else:
+            print('Not found')
+
+# print phoneBook
