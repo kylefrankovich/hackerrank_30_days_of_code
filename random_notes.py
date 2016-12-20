@@ -547,5 +547,36 @@ failed_input = [[-1, -1, 0, -9, -2, -2],
 
 arr = failed_input
 
+# from discussion:
 
-# day 12 ()
+res = []
+
+for x in range(0, 4):
+    for y in range(0, 4):
+        s = sum(arr[x][y:y+3]) + arr[x+1][y+1] + sum(arr[x+2][y:y+3])
+        res.append(s)
+
+print(max(res))
+
+# and:
+
+int maxsum=-64;  # she used this value, as explained here:
+'''Since there are 7 elements that make up the hourglass shape, and the
+minimum value for each element is -9, we take 7*-9, or -63, as the minimum
+value possible for each hourglass.'''
+int hoursum;
+for(int i=0;i<4;i++){
+    for(int j=0;j<4;j++){
+        hoursum=arr[i+1][j+1];
+        for(int k=0;k<3;k++){
+            hoursum = hoursum + arr[i][j+k] + arr[i+2][j+k];
+        }
+        if(hoursum > maxsum)
+         maxsum = hoursum;
+    }
+}
+printf("%d",maxsum);
+
+
+# day 12 (Inheritance):
+
